@@ -85,7 +85,7 @@ def main():
             add_leads()
         elif op == "2":
             list_leads()
-        elif op == "4":
+        elif op == "3":
             export_leads()      
         elif op == "0":
             print("Até mais!")
@@ -100,12 +100,13 @@ def print_menu():
     print("\nIdentificador de profisões futuras")
     print("[1] Adicionar habilidades")
     print("[2] Listar habilidades")
-    print("[4] Exportar CSV")
+    print("[3] Exportar CSV")
     print("[0] Sair")
 
 
 if __name__ == "__main__":
     main()
+
 
 
 
