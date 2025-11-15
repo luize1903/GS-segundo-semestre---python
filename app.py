@@ -31,7 +31,7 @@ def add_leads():
 
     repo.create_lead(model_lead(tecnologia, automacao, desenvolvimento, criatividade, categoria))
 
-    print("✔ Lead adicionado!")
+    print("Lead adicionado!")
 
 
 def list_leads():
@@ -106,6 +106,7 @@ def print_menu():
 
 if __name__ == "__main__":
     main()
+
 
 
 
