@@ -19,7 +19,7 @@ python app.py
 
 [1] Adicionar habilidades
 [2] Listar habilidades
-[4] Exportar CSV
+[3] Exportar CSV
 [0] Sair
 
 Descrição dos arquivos:
