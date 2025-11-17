@@ -1,7 +1,7 @@
 from stages import model_lead
 import repo
 
-
+# Pergunta sim/não
 def perguntar_sn(pergunta):
     while True:
         resposta = input(pergunta).strip().lower()
@@ -12,14 +12,18 @@ def perguntar_sn(pergunta):
         else:
             print(" Responda apenas com 'sim' ou 'não'.")
 
+# Adiciona lead
 def add_leads():
+    # Coleta das respostas
     tecnologia = perguntar_sn("Interesse em tecnologia: ").strip()
     automacao = perguntar_sn("Prática em automação: ").strip()
     desenvolvimento = perguntar_sn("Facilidade no desenvolvemento: ").strip()
     criatividade = perguntar_sn("Alta criatividade: ").strip()
+    # Conta quantos "sim" foram respondidos
     respostas = [tecnologia, automacao, desenvolvimento, criatividade]
     pontuacao = respostas.count("sim")
 
+# Classificação com base na pontuação
     if pontuacao >= 3:
         categoria = "Profissões voltadas a Inteligência artificial"
     elif pontuacao >= 1:
@@ -28,14 +32,15 @@ def add_leads():
         categoria = "Outras áreas, exemplo humanas"
 
     print(f"\n Classificação: {categoria}")
-
+# Cria e salva o lead no repositório
     repo.create_lead(model_lead(tecnologia, automacao, desenvolvimento, criatividade, categoria))
 
-    print("Lead adicionado!")
+    print(" Lead adicionado!")
 
-
+# Mostra todos os leads já cadastrados
 def list_leads():
     leads = repo.read_leads()
+# Se não houver registros, exibir aviso
     if not leads:
         print("Nenhum lead ainda.")
         return
@@ -44,10 +49,10 @@ def list_leads():
     for i, l in enumerate(leads):
         print(f"{i:02d}| {l['Tecnologia']:<20} | {l['Automação']:<17} | {l['Desenvolvimento']:<21} |{l['Criatividade']:<21}|{l['Categoria']:<21}")
 
-
+# Busca
 def search_flow():
     q = input("Buscar por: ").strip().lower()
-    if not q:
+    if not q:  # Evita consulta vazia
         print("Consulta vazia.")
         return
     leads = repo.read_leads()
@@ -59,24 +64,25 @@ def search_flow():
     if not results:
         print("Nada encontrado.")
         return
+    # Cabeçalho da tabela de resultados
     print("\n# | Interesse em tecnologia   | Prática com automação   | Facilidade no desenvolvimento   |Alta Criatividade   |Categoria  ")
     print("--+----------------------+-------------------+-----------------------")
-    for i, l in results:
+    for i, l in results: # Imprime cada resultado
         print(f"{i:02d}| {l['Tecnologia']:<20} | {l['Automação']:<17} | {l['Desenvolvimento']:<21} |{l['Criatividade']:<21}|{l['Categoria']:<21}")
 
 
-# criar vazio e dps exportar da função
+# Exporta CSV
 
 def export_leads():
     path = repo.export_csv()
     if path is None:
         print("Não consegui escrever o CSV. Feche o arquivo se estiver aberto e tente novamente.")
     else:
-        print(f"✔ Exportado para: {path}")
+        print(f" Exportado para: {path}")
 
 
-# criar search_flow primeiro, dps export_leads
 
+# Menu principal
 def main():
     while True:
         print_menu()
@@ -106,8 +112,6 @@ def print_menu():
 
 if __name__ == "__main__":
     main()
-
-
 
 
 
